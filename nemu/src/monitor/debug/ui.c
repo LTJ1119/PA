@@ -139,7 +139,7 @@ static int cmd_x(char *args){
     for(i=0;i<num;i++)
     {    printf("0x%08x\t",ad);
 	 printf("0x%08x\t",vaddr_read(ad,4));
-	 for(j=i;j<=4;j++)
+	 for(j=1;j<=4;j++)
 	 {
 	    printf("%02x ",vaddr_read(ad,j)>>(8*(j-1)));
 	 }
