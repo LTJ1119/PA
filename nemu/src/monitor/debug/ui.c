@@ -127,29 +127,24 @@ static int cmd_info(char *args){
 }
 
 static int cmd_x(char *args){
-    vaddr_t start;
+    vaddr_t ad;
     int num;
-    int t=0;
     char *arg_n=strtok(NULL," ");
     sscanf(arg_n,"%d",&num);
     char *arg_s=strtok(NULL," ");
-    sscanf(arg_s,"%x",&start);
+    sscanf(arg_s,"%x",&ad);
     printf("Address		Dword block		Byte sequence");
     printf("\n");
     int i,j;
     for(i=0;i<num;i++)
-    {    printf("%#x	",start);
-	 printf("%#x	",vaddr_read(start,4));
+    {    printf("0x%08x\t",ad);
+	 printf("0x%08x\t",vaddr_read(ad,4));
 	 for(j=i;j<=4;j++)
 	 {
-	    vaddr_t temp=vaddr_read(start,j);
-	    int mov=(t<<3);
-	    temp=temp>>mov;
-	    printf("%02x ",temp);
-	    t++;
+	    printf("%02x ",vaddr_read(ad,j)>>(8*(j-1)));
 	 }
 	 printf("\n");
-	 start+=4;
+	 ad+=4;
     }
     return 0;
 }
