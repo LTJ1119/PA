@@ -106,17 +106,17 @@ static int cmd_info(char *args){
     if(strcmp(arg,"r")==0)
     {
         for(i=0;i<8;i++)
-	{    printf("%s:\t%8x\t",regsl[i],cpu.gpr[i]._32);
+	{    printf("%s:\t0x%08x\t%d",regsl[i],cpu.gpr[i]._32,cpu.gpr[i]._32);
 	     printf("\n");
 	}
 	for(i=0;i<8;i++)
-	{    printf("%s:\t%8x\t",regsw[i],cpu.gpr[i]._16);
+	{    printf("%s:\t0x%08x\t%d",regsw[i],cpu.gpr[i]._16,cpu.gpr[i]._16);
 	     printf("\n");
 	}
 	for(i=0;i<8;i++)
 	{
 	    for(int j=0;j<2;j++)
-	    {    printf("%s:\t%8x\t",regsb[i],cpu.gpr[i]._8[j]);
+	    {    printf("%s:.\t0x%8x\t%d",regsb[i],cpu.gpr[i]._8[j],cpu.gpr[i]._8[j]);
 		 printf("\n");
 	    }
 	}
