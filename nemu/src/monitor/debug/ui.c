@@ -116,7 +116,7 @@ static int cmd_info(char *args){
 	for(i=0;i<8;i++)
 	{
 	    for(int j=0;j<2;j++)
-	    {    printf("%s:.\t0x%8x\t%d",regsb[i],cpu.gpr[i]._8[j],cpu.gpr[i]._8[j]);
+	    {    printf("%s:.\t0x%08x\t%d",regsb[i],cpu.gpr[i]._8[j],cpu.gpr[i]._8[j]);
 		 printf("\n");
 	    }
 	}
