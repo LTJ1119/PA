@@ -40,6 +40,8 @@ static int cmd_help(char *args);
 
 static int cmd_si(char *args);
 
+static int cmd_info(char *args);
+
 static struct {
   char *name;
   char *description;
@@ -49,7 +51,7 @@ static struct {
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
   { "si", "Single Step Execution", cmd_si},
-
+  { "info","Print Register", cmd_info},
   /* TODO: Add more commands */
 
 };
@@ -92,6 +94,32 @@ static int cmd_si(char *args){
 	else
 	    cpu_exec(i);
     }
+    return 0;
+}
+
+static int cmd_info(char *args){
+    char *arg=strtok(NULL," ");
+    int i;
+    if(strcmp(arg,"r")==0)
+    {
+        for(i=0;i<8;i++)
+	{    printf("%s:\t%8x\t",regsl[i],cpu.gpr[i]._32);
+	     printf("\n");
+	}
+	for(i=0;i<8;i++)
+	{    printf("%s:\t%8x\t",regsw[i],cpu.gpr[i]._16);
+	     printf("\n");
+	}
+	for(i=0;i<8;i++)
+	{
+	    for(int j=0;j<2;j++)
+	    {    printf("%s:\t%8x\t",regsb[i],cpu.gpr[i]._8[j]);
+		 printf("\n");
+	    }
+	}
+    }
+    else if(strcmp(arg,"w")==0)
+	    printf("PA1.3");
     return 0;
 }
 
