@@ -133,7 +133,7 @@ static int cmd_x(char *args){
     char *arg_s=strtok(NULL," ");
     sscanf(arg_n,"%d",&num);
     sscanf(arg_s,"%x",&start);
-    printf("Address	Date");
+    printf("Address		Data");
     printf("\n");
     for(int i=0;i<num;i++)
     {    printf("%#x	",start);
