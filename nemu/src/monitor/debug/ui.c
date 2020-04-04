@@ -128,19 +128,19 @@ static int cmd_info(char *args){
 
 static int cmd_x(char *args){
     vaddr_t start;
-    int num,k;
+    int num;
     int t=0;
     char *arg_n=strtok(NULL," ");
-    char *arg_s=strtok(NULL," ");
     sscanf(arg_n,"%d",&num);
+    char *arg_s=strtok(NULL," ");
     sscanf(arg_s,"%x",&start);
-    printf("Address		Data		Byte Sequence");
+    printf("Address		Dword block		Byte sequence");
     printf("\n");
-    for(int i=0;i<num;i++)
+    int i,j;
+    for(i=0;i<num;i++)
     {    printf("%#x	",start);
-	 k=vaddr_read(start,4);
-	 printf("%#x	",k);
-	 for(int j=i;j<=4;j++)
+	 printf("%#x	",vaddr_read(start,4));
+	 for(j=i;j<=4;j++)
 	 {
 	    vaddr_t temp=vaddr_read(start,j);
 	    int mov=(t<<3);
