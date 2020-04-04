@@ -129,6 +129,7 @@ static int cmd_info(char *args){
 static int cmd_x(char *args){
     vaddr_t start;
     int num,k;
+    int t=0;
     char *arg_n=strtok(NULL," ");
     char *arg_s=strtok(NULL," ");
     sscanf(arg_n,"%d",&num);
@@ -138,7 +139,15 @@ static int cmd_x(char *args){
     for(int i=0;i<num;i++)
     {    printf("%#x	",start);
 	 k=vaddr_read(start,4);
-	 printf("%#x",k);
+	 printf("%#x	",k);
+	 for(int j=i;j<=4;j++)
+	 {
+	    vaddr_t temp=vaddr_read(start,j);
+	    int mov=(t<<3);
+	    temp=temp>>mov;
+	    printf("%02x",temp);
+	    t++;
+	 }
 	 printf("\n");
 	 start+=4;
     }
