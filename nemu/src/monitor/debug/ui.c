@@ -42,6 +42,8 @@ static int cmd_si(char *args);
 
 static int cmd_info(char *args);
 
+static int cmd_x(char *args);
+
 static struct {
   char *name;
   char *description;
@@ -52,6 +54,7 @@ static struct {
   { "q", "Exit NEMU", cmd_q },
   { "si", "Single Step Execution", cmd_si},
   { "info","Print Register", cmd_info},
+  { "x","Scan Memory",cmd_x},
   /* TODO: Add more commands */
 
 };
@@ -120,6 +123,25 @@ static int cmd_info(char *args){
     }
     else if(strcmp(arg,"w")==0)
 	    printf("PA1.3");
+    return 0;
+}
+
+static int cmd_x(char *args){
+    vaddr_t start;
+    int num,k;
+    char *arg_n=strtok(NULL," ");
+    char *arg_s=strtok(NULL," ");
+    sscanf(arg_n,"%d",&num);
+    sscanf(arg_s,"%x",&start);
+    printf("Address	Date");
+    printf("\n");
+    for(int i=0;i<num;i++)
+    {    printf("%#x	",start);
+	 k=vaddr_read(start,4);
+	 printf("%#x",k);
+	 printf("\n");
+	 start+=4;
+    }
     return 0;
 }
 
