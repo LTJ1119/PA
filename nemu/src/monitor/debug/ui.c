@@ -134,7 +134,7 @@ static int cmd_x(char *args){
     char *arg_s=strtok(NULL," ");
     sscanf(arg_n,"%d",&num);
     sscanf(arg_s,"%x",&start);
-    printf("Address		Data");
+    printf("Address		Data		Byte Sequence");
     printf("\n");
     for(int i=0;i<num;i++)
     {    printf("%#x	",start);
@@ -145,7 +145,7 @@ static int cmd_x(char *args){
 	    vaddr_t temp=vaddr_read(start,j);
 	    int mov=(t<<3);
 	    temp=temp>>mov;
-	    printf("%02x",temp);
+	    printf("%02x ",temp);
 	    t++;
 	 }
 	 printf("\n");
