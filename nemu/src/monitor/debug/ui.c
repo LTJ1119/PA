@@ -44,6 +44,8 @@ static int cmd_info(char *args);
 
 static int cmd_x(char *args);
 
+static int cmd_p(char *args);
+
 static struct {
   char *name;
   char *description;
@@ -55,6 +57,7 @@ static struct {
   { "si", "Single Step Execution", cmd_si},
   { "info","Print Register", cmd_info},
   { "x","Scan Memory",cmd_x},
+  { "p","Expression Evaluation",cmd_p},
   /* TODO: Add more commands */
 
 };
@@ -146,6 +149,12 @@ static int cmd_x(char *args){
 	 printf("\n");
 	 ad+=4;
     }
+    return 0;
+}
+
+static int cmd_p(char *args){
+    char *arg=strtok(NULL,"&");
+    printf("%s\n",arg);
     return 0;
 }
 
