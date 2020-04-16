@@ -155,6 +155,8 @@ static int cmd_x(char *args){
 static int cmd_p(char *args){
     char *arg=strtok(NULL,"&");
     printf("%s\n",arg);
+    bool success=true;
+    expr(arg,&success);
     return 0;
 }
 
