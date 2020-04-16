@@ -141,7 +141,7 @@ bool check_parentheses(int start,int end)
 }
 
 uint32_t expr(char *e, bool *success) {
-  if(check_parentheses(0,nr_token)==0)
+  if(check_parentheses(0,nr_token)==false)
 	printf("false!\n");
   else
 	printf("true!\n");
