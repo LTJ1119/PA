@@ -167,7 +167,7 @@ bool compare_priorities(int i,int j){
 uint32_t find_dominated_op(int p,int q){
     int op=p;
     int judge=0;
-    for(int i=p+1;i<q;i++)
+    for(int i=p;i<q;i++)
     {
     	if(check_token(i)==false)
 	    continue;
@@ -183,14 +183,8 @@ uint32_t find_dominated_op(int p,int q){
 		else
 		    continue;
 	    }
-	    i++;
 	}
-	else if(tokens[op].type=='(')
-	{
-	    op=i;
-	    continue;
-	}
-	else if(compare_priorities(op,i)==true)
+	else if(compare_priorities(op,i)==true||tokens[op].type=='(')
 	    op=i;
     }
     return op;
