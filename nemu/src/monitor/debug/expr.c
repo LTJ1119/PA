@@ -119,7 +119,32 @@ static bool make_token(char *e) {
   return true;
 }
 
+bool check_parentheses(int start,int end)
+{
+    if(tokens[start].type!='('||tokens[end].type!=')')
+	return false;
+    int judge=0;
+    for(int i=start;i<end;i++)
+    {
+	if(tokens[i].type=='(')
+	    judge++;
+	else if(tokens[i].type==')')
+	    judge--;
+	else
+	    continue;
+	if(judge<0)
+	    return false;
+    }
+    if(judge!=0)
+	return false;
+    return true;  
+}
+
 uint32_t expr(char *e, bool *success) {
+  if(check_parentheses(0,nr_token-1)==0)
+	printf("false!\n");
+  else
+	printf("true!\n");
   if (!make_token(e)) {
     *success = false;
     return 0;
