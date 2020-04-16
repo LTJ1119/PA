@@ -123,7 +123,6 @@ bool check_parentheses(int start,int end)
 {
     if((tokens[start].type!='(')||(tokens[end-1].type!=')'))
 	return false;
-    printf("1");
     int judge=0;
     for(int i=start;i<end;i++)
     {
@@ -138,16 +137,17 @@ bool check_parentheses(int start,int end)
     }
     if(judge!=0)
 	return false;
-    printf("2");
     return true;  
 }
 
 uint32_t expr(char *e, bool *success) {
-  if(check_parentheses(0,nr_token)==false)
-	printf("false!\n");
-  else
-	printf("true!\n");
-  if (!make_token(e)) {
+  
+   bool a=make_token(e);
+   if(check_parentheses(0,nr_token)==true)
+	   printf("true expression!\n");
+    else
+	    printf("false expression!\n");
+   if (!a) {
     *success = false;
     return 0;
   }
