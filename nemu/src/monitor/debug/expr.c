@@ -191,22 +191,62 @@ uint32_t find_dominated_op(int p,int q){
     return op;
 }
 
-uint32_t expr(char *e, bool *success) {
-  
-   bool a=make_token(e);
-   if(check_parentheses(0,nr_token)==true)
-	    printf("true expression!\n");
+uint32_t eval(int p,int q){
+    if(p>q)
+	return false;
+    else if(p==q)
+    {
+        int result=0;
+	if(tokens[p].type==TK_TEN)
+	    sscanf(tokens[p].str,"%d",&result);
+	if(tokens[p].type==TK_SIXTEEN)
+	    sscanf(tokens[p].str,"%x",&result);
+	else if(tokens[p].type==TK_REGS)
+	{
+	    for(int i=0;i<4;i++)
+	        tokens[p].str[i]=tokens[p].str[i+1];
+	    if(strcmp(tokens[p].str,"eip")==0)
+		result=cpu.eip;
+	    else
+	    {
+	        for(int i=0;i<8;i++)
+		{
+		    if(strcmp(tokens[p].str,regsl[i])==0)
+		    {
+		        result=cpu.gpr[i]._32;
+			break;
+		    }
+		}
+	    }
+	}
+	return result;
+    }
+    else if(check_parentheses(p,q)==true)
+	return eval(p+1,q-1);
     else
-	    printf("false expression!\n");
-    int op=find_dominated_op(0,nr_token);
-    printf("%s\n",tokens[op].str);
-   if (!a) {
+    {
+        int op=find_dominated_op(p,q);
+	int val1,val2;
+	val1=eval(p,op-1);
+	val2=eval(op+1,q);
+	switch(tokens[op].type)
+	{
+	    case '+':return val1+val2;
+	    case '-':return val1-val2;
+	    case '*':return val1*val2;
+	    case '/':return val1/val2;
+	    default: assert(0);
+	}
+    }
+    return 0;
+}
+
+uint32_t expr(char *e, bool *success) {
+   if (!make_token(e)) {
     *success = false;
     return 0;
   }
 
   /* TODO: Insert codes to evaluate the expression. */
-  TODO();
-
-  return 0;
+  return eval(0,nr_token);
 }
