@@ -7,7 +7,7 @@
 #include <regex.h>
 
 enum {
-  TK_NOTYPE = 256, TK_EQ=0, TK_TEN=10, TK_SIXTEEN=16, TK_REGS=255
+  TK_NOTYPE = 256, TK_UEQ=0, TK_EQ=1, TK_TEN=10, TK_SIXTEEN=16, TK_REGS=255, TK_POINT=9
 
   /* TODO: Add more token types */
 
@@ -28,11 +28,15 @@ static struct rule {
   {"\\*",'*'},		//mul
   {"\\/",'/'},		//div
   {"==", TK_EQ},         // equal
+  {"!=", TK_UEQ},	//unequal
   {"[0-9]+",TK_TEN},	//10
   {"0x[0-9a-f]+",TK_SIXTEEN},	//16
   {"\\$[a-ehilpx]{2,3}",TK_REGS},	//reg
   {"\\(",'('},
   {"\\)",')'},
+  {"&&", '&'},
+  {"\\|\\|", '|'},
+  {"!",'!'},
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
@@ -227,6 +231,10 @@ uint32_t eval(int p,int q){
     {
         int op=find_dominated_op(p,q);
 	printf("%d\n",op);
+	if(op==p&&tokens[p].type==TK_POINT)
+	    return vaddr_read(eval(p+1,q),4);
+	if(op==p&&tokens[p].type=='!')
+	    return !eval(op+1,q);
 	int val1,val2;
 	val1=eval(p,op-1);
 	val2=eval(op+1,q);
@@ -236,6 +244,10 @@ uint32_t eval(int p,int q){
 	    case '-':return val1-val2;
 	    case '*':return val1*val2;
 	    case '/':return val1/val2;
+	    case '&':return val1&val2;
+	    case '|':return val1|val2;
+	    case TK_EQ: return val1==val2;
+	    case TK_UEQ: return val1!=val2;
 	}
     }
     return 0;
@@ -248,5 +260,11 @@ uint32_t expr(char *e, bool *success) {
   }
 
   /* TODO: Insert codes to evaluate the expression. */
-  return eval(0,nr_token-1);
+   for(int i=0;i<nr_token;i++)
+   {
+      if( tokens[i].type=='*'&&(i==0||tokens[i-1].type=='+'||tokens[i-1].type=='-'||\
+          tokens[i-1].type=='*'||tokens[i-1].type=='/'))
+	      tokens[i].type=TK_POINT;
+   }
+   return eval(0,nr_token-1);
 }
