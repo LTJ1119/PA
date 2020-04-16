@@ -121,7 +121,7 @@ static bool make_token(char *e) {
 
 bool check_parentheses(int start,int end)
 {
-    if(tokens[start].type!='('||tokens[end].type!=')')
+    if(tokens[start].type!='('||tokens[end-1].type!=')')
 	return false;
     int judge=0;
     for(int i=start;i<end;i++)
@@ -141,7 +141,7 @@ bool check_parentheses(int start,int end)
 }
 
 uint32_t expr(char *e, bool *success) {
-  if(check_parentheses(0,nr_token-1)==0)
+  if(check_parentheses(0,nr_token)==0)
 	printf("false!\n");
   else
 	printf("true!\n");
