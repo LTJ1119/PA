@@ -89,7 +89,16 @@ static bool make_token(char *e) {
 
         switch (rules[i].token_type) {
 	  case TK_NOTYPE:break;
-	  case '+'|'-'|'*'|'/'|'('|')'|TK_EQ|TK_TEN|TK_SIXTEEN|TK_REGS:
+	  case '+':
+	  case'-':
+	  case'*':
+	  case'/':
+	  case'(':
+	  case')':
+	  case TK_EQ:
+	  case TK_TEN:
+	  case TK_SIXTEEN:
+	  case TK_REGS:
 	  {    tokens[nr_token].type=rules[i].token_type;
 	       strncpy(tokens[nr_token].str,substr_start,substr_len);
 	       nr_token++;
