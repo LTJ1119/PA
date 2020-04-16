@@ -226,6 +226,7 @@ uint32_t eval(int p,int q){
     else
     {
         int op=find_dominated_op(p,q);
+	printf("%d\n",tokens[op].type);
 	int val1,val2;
 	val1=eval(p,op-1);
 	val2=eval(op+1,q);
