@@ -120,10 +120,10 @@ static bool make_token(char *e) {
 }
 
 bool check_parentheses(int start,int end){
-    if((tokens[start].type!='(')||(tokens[end-1].type!=')'))
+    if((tokens[start].type!='(')||(tokens[end].type!=')'))
 	return false;
     int judge=0;
-    for(int i=start+1;i<end-1;i++)
+    for(int i=start+1;i<end;i++)
     {
 	if(tokens[i].type=='(')
 	    judge++;
@@ -248,5 +248,5 @@ uint32_t expr(char *e, bool *success) {
   }
 
   /* TODO: Insert codes to evaluate the expression. */
-  return eval(0,nr_token);
+  return eval(0,nr_token-1);
 }
