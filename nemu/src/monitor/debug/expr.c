@@ -119,12 +119,11 @@ static bool make_token(char *e) {
   return true;
 }
 
-bool check_parentheses(int start,int end)
-{
+bool check_parentheses(int start,int end){
     if((tokens[start].type!='(')||(tokens[end-1].type!=')'))
 	return false;
     int judge=0;
-    for(int i=start;i<end;i++)
+    for(int i=start+1;i<end-1;i++)
     {
 	if(tokens[i].type=='(')
 	    judge++;
@@ -140,13 +139,66 @@ bool check_parentheses(int start,int end)
     return true;  
 }
 
+bool check_token(int i){
+    switch(tokens[i].type){
+        case '(':
+	case ')':
+	case '+':
+	case '-':
+	case '*':
+	case '/':
+	{return true;}break;
+     }
+    return false;
+}
+
+bool compare_priorities(int i,int j){
+    int x=0;
+    int y=0;
+    if(tokens[i].type=='*'||tokens[i].type=='/')
+	x=1;
+    if(tokens[j].type=='*'||tokens[j].type=='/')
+	y=1;
+    else if(x>y||x==y)
+	return true;
+    return false;
+}
+
+uint32_t find_dominated_op(int p,int q){
+    int op=p;
+    int judge=0;
+    for(int i=p+1;i<q;i++)
+    {
+    	if(check_token(i)==false)
+	    continue;
+	if(tokens[i].type=='(')
+	{
+	    judge=1;
+	    for(i++;judge!=0;i++)
+	    {
+		if(tokens[i].type==')')
+		    judge--;
+		if(tokens[i].type=='(')
+		    judge++;
+		else
+		    continue;
+	    }
+	}
+	else if(compare_priorities(op,i)==true)
+	    op=i;
+    }
+    return op;
+}
+
 uint32_t expr(char *e, bool *success) {
   
    bool a=make_token(e);
    if(check_parentheses(0,nr_token)==true)
-	   printf("true expression!\n");
+	    printf("true expression!\n");
     else
 	    printf("false expression!\n");
+    int op=find_dominated_op(0,nr_token);
+    printf("%s\n",tokens[op].str);
    if (!a) {
     *success = false;
     return 0;
