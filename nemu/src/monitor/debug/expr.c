@@ -185,7 +185,7 @@ uint32_t find_dominated_op(int p,int q){
 	    }
 	    i--;
 	}
-	else if(compare_priorities(op,i)==true||tokens[op].type=='(')
+	else if(compare_priorities(op,i)==true||tokens[op].type=='('||check_token(op)==false)
 	    op=i;
     }
     return op;
