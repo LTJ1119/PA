@@ -123,6 +123,7 @@ bool check_parentheses(int start,int end)
 {
     if((tokens[start].type!='(')||(tokens[end-1].type!=')'))
 	return false;
+    printf("1");
     int judge=0;
     for(int i=start;i<end;i++)
     {
@@ -137,6 +138,7 @@ bool check_parentheses(int start,int end)
     }
     if(judge!=0)
 	return false;
+    printf("2");
     return true;  
 }
 
