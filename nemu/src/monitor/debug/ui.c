@@ -46,6 +46,11 @@ static int cmd_x(char *args);
 
 static int cmd_p(char *args);
 
+static int cmd_w(char *args);
+
+static int cmd_d(char *args);
+
+
 static struct {
   char *name;
   char *description;
@@ -58,6 +63,8 @@ static struct {
   { "info","Print Register", cmd_info},
   { "x","Scan Memory",cmd_x},
   { "p","Expression Evaluation",cmd_p},
+  { "w","Set New Watchpoint",cmd_w},
+  { "d","Delete Watchpoint",cmd_d},
   /* TODO: Add more commands */
 
 };
@@ -125,7 +132,10 @@ static int cmd_info(char *args){
 	}
     }
     else if(strcmp(arg,"w")==0)
-	    printf("PA1.3");
+    {
+        printf("NO Expr\tOld Value\n");
+	list_watchpoint();
+    }
     return 0;
 }
 
@@ -158,6 +168,19 @@ static int cmd_p(char *args){
     bool success=true;
     int result=expr(arg,&success);
     printf("Result: %d\n",result);
+    return 0;
+}
+
+static int cmd_w(char *args){
+    set_watchpoint(args);
+    return 0;
+}
+
+static int cmd_d(char *args){
+    char *arg=strtok(NULL," ");
+    int NO;
+    sscanf(arg,"%d",&NO);
+    delete_watchpoint(NO);
     return 0;
 }
 
