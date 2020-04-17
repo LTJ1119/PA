@@ -204,7 +204,7 @@ uint32_t eval(int p,int q){
 	if(tokens[p].type==TK_TEN)
 	    sscanf(tokens[p].str,"%d",&result);
 	if(tokens[p].type==TK_SIXTEEN)
-	    sscanf(tokens[p].str,"%x",&result);
+    	    sscanf(tokens[p].str,"0x%x",&result);
 	else if(tokens[p].type==TK_REGS)
 	{
 	    for(int i=0;i<4;i++)
