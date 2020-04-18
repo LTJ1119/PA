@@ -74,6 +74,7 @@ bool delete_watchpoint(int NO){
     {
         head=head->next;
 	free_wp(p);
+	printf("Watchpoint#%d Deleted!\n",NO);
 	return true;
     }
     while(!p&&p->NO!=NO)
@@ -90,7 +91,7 @@ bool delete_watchpoint(int NO){
 	printf("NO Not Found!\n");
 	return false;
     }
-    printf("Successfully Deleted!\n");
+    printf("Watchpoint#%d Deleted!\n",NO);
     return true;
 }
 
@@ -100,7 +101,7 @@ void list_watchpoint(){
 	printf("No Watchpoint!\n");
     else
     {
-	printf("NO\tExpr\tOld Value\n");
+	printf("NO\tExpr\t	Old Value\n");
 	while(p&&p!=free_)
 	{
 	    printf("%2d\t%-25s\t0x%x\n",p->NO,p->expr,p->old_val);
