@@ -100,10 +100,10 @@ void list_watchpoint(){
 	printf("No Watchpoint!\n");
     else
     {
-	printf("NO\tExpr\t	Old Value\n");
-	while(p)
+	printf("NO\tExpr\tOld Value\n");
+	while(p&&p!=free_)
 	{
-	    printf("%2d %-25s%x\n",p->NO,p->expr,p->old_val);
+	    printf("%2d\t%-25s\t0x%x\n",p->NO,p->expr,p->old_val);
 	    p=p->next;
 	}
     }
