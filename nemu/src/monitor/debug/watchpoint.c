@@ -40,10 +40,14 @@ void free_wp(WP *wp){
 }
 
 int set_watchpoint(char *e){
-    if(free_==NULL)
-	init_wp_pool();
     WP *p;
-    p=new_wp();
+    if(head==NULL)
+    {	init_wp_pool();
+	p=new_wp();
+	head=p;
+    }
+    else
+        p=new_wp();
     printf("Set watchpoint #%d\n",p->NO);
     strcpy(head->expr,e);
     printf("expr=%s\n",p->expr);
@@ -55,7 +59,7 @@ int set_watchpoint(char *e){
     {	printf("Fail!\n");
         return 0;
     }
-    return 1;
+    return p->NO;
 }
 
 bool delete_watchpoint(int NO){
