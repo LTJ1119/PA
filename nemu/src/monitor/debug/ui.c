@@ -133,7 +133,6 @@ static int cmd_info(char *args){
     }
     else if(strcmp(arg,"w")==0)
     {
-        printf("NO Expr\tOld Value\n");
 	list_watchpoint();
     }
     return 0;
