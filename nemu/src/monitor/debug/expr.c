@@ -104,8 +104,8 @@ static bool make_token(char *e) {
 	  case '!':
 	  case TK_EQ:
 	  case TK_UEQ:
-	  case TK_TEN:
 	  case TK_SIXTEEN:
+	  case TK_TEN:
 	  case TK_REGS:
 	  {    tokens[nr_token].type=rules[i].token_type;
 	       strncpy(tokens[nr_token].str,substr_start,substr_len);
