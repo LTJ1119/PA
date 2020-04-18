@@ -29,8 +29,8 @@ static struct rule {
   {"\\/",'/'},		//div
   {"==", TK_EQ},         // equal
   {"!=", TK_UEQ},	//unequal
-  {"[0-9]+",TK_TEN},	//10
   {"0x[0-9a-f]+",TK_SIXTEEN},	//16
+  {"[0-9]+", TK_TEN},
   {"\\$[a-ehilpx]{2,3}",TK_REGS},	//reg
   {"\\(",'('},
   {"\\)",')'},
