@@ -111,7 +111,7 @@ void list_watchpoint(){
 
 WP* scan_watchpoint(){
     WP *p=head;
-    if(!p)
+    if(!p&&p!=free_)
     {
         printf("No Watchpoint!\n");
 	return NULL;
