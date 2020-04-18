@@ -28,7 +28,8 @@ WP*  new_wp(){
 	return p;
     }
     else
-	assert(0);
+    {	printf("1\n");
+	assert(0);}
 }
 
 void free_wp(WP *wp){
@@ -41,7 +42,7 @@ void free_wp(WP *wp){
 
 int set_watchpoint(char *e){
     WP *p;
-    if(head==NULL)
+    if(free_==NULL)
     {	init_wp_pool();
 	p=new_wp();
 	head=p;
