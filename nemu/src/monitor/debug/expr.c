@@ -94,12 +94,16 @@ static bool make_token(char *e) {
         switch (rules[i].token_type) {
 	  case TK_NOTYPE:break;
 	  case '+':
-	  case'-':
-	  case'*':
-	  case'/':
-	  case'(':
-	  case')':
+	  case '-':
+	  case '*':
+	  case '/':
+	  case '(':
+	  case ')':
+	  case '&':
+	  case '|':
+	  case '!':
 	  case TK_EQ:
+	  case TK_UEQ:
 	  case TK_TEN:
 	  case TK_SIXTEEN:
 	  case TK_REGS:
