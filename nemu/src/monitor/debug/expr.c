@@ -179,6 +179,9 @@ uint32_t find_dominated_op(int p,int q){
     {
     	if(check_token(i)==false)
 	    continue;
+	if(tokens[i].type==TK_EQ||tokens[i].type==TK_UEQ)
+	{    op=i;
+	    return op;}
 	if(tokens[i].type=='(')
 	{
 	    judge=1;
