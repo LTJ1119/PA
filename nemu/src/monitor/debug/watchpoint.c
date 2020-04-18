@@ -40,6 +40,8 @@ void free_wp(WP *wp){
 }
 
 int set_watchpoint(char *e){
+    if(free_==NULL)
+	init_wp_pool();
     WP *p;
     p=new_wp();
     printf("Set watchpoint #%d\n",p->NO);
