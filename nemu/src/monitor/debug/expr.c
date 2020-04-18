@@ -7,7 +7,7 @@
 #include <regex.h>
 
 enum {
-  TK_NOTYPE = 256, TK_UEQ=0, TK_EQ=1, TK_TEN=10, TK_SIXTEEN=16, TK_REGS=255, TK_POINT=9
+  TK_NOTYPE = 256, TK_EQ=1, TK_UEQ=0,TK_TEN=10, TK_SIXTEEN=16, TK_REGS=255, TK_POINT=9
 
   /* TODO: Add more token types */
 
@@ -234,7 +234,7 @@ uint32_t eval(int p,int q){
     else
     {
         int op=find_dominated_op(p,q);
-	printf("%d\n",op);
+	//printf("%d\n",op);
 	if(op==p&&tokens[p].type==TK_POINT)
 	    return vaddr_read(eval(p+1,q),4);
 	if(op==p&&tokens[p].type=='!')
@@ -250,8 +250,8 @@ uint32_t eval(int p,int q){
 	    case '/':return val1/val2;
 	    case '&':return val1&val2;
 	    case '|':return val1|val2;
-	    case TK_EQ: return val1==val2;
-	    case TK_UEQ: return val1!=val2;
+	    case TK_EQ: return val1 == val2;
+	    case TK_UEQ: return val1 != val2;
 	}
     }
     return 0;
