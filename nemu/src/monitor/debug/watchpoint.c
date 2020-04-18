@@ -50,7 +50,7 @@ int set_watchpoint(char *e){
     else
         p=new_wp();
     printf("Set watchpoint #%d\n",p->NO);
-    strcpy(head->expr,e);
+    strcpy(p->expr,e);
     printf("expr=%s\n",p->expr);
     bool success=true;
     p->old_val=expr(p->expr,&success);
