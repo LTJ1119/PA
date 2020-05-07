@@ -38,6 +38,19 @@ static int cmd_q(char *args) {
 
 static int cmd_help(char *args);
 
+static int cmd_si(char *args);
+
+static int cmd_info(char *args);
+
+static int cmd_x(char *args);
+
+static int cmd_p(char *args);
+
+static int cmd_w(char *args);
+
+static int cmd_d(char *args);
+
+
 static struct {
   char *name;
   char *description;
@@ -46,7 +59,12 @@ static struct {
   { "help", "Display informations about all supported commands", cmd_help },
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
-
+  { "si", "Single Step Execution", cmd_si},
+  { "info","Print Register", cmd_info},
+  { "x","Scan Memory",cmd_x},
+  { "p","Expression Evaluation",cmd_p},
+  { "w","Set New Watchpoint",cmd_w},
+  { "d","Delete Watchpoint",cmd_d},
   /* TODO: Add more commands */
 
 };
@@ -74,6 +92,95 @@ static int cmd_help(char *args) {
     printf("Unknown command '%s'\n", arg);
   }
   return 0;
+}
+
+static int cmd_si(char *args){
+    int i=0;
+    char *arg=strtok(NULL, " ");
+    if(!arg)
+	cpu_exec(1);
+    else
+    {
+	sscanf(arg,"%d",&i);
+	if(i<=0)
+	    cpu_exec(-1);
+	else
+	    cpu_exec(i);
+    }
+    return 0;
+}
+
+static int cmd_info(char *args){
+    char *arg=strtok(NULL," ");
+    int i;
+    if(strcmp(arg,"r")==0)
+    {
+        for(i=0;i<8;i++)
+	{    printf("%s:\t0x%08x\t%d",regsl[i],cpu.gpr[i]._32,cpu.gpr[i]._32);
+	     printf("\n");
+	}
+	for(i=0;i<8;i++)
+	{    printf("%s:\t0x%08x\t%d",regsw[i],cpu.gpr[i]._16,cpu.gpr[i]._16);
+	     printf("\n");
+	}
+	for(i=0;i<8;i++)
+	{
+	    for(int j=0;j<2;j++)
+	    {    printf("%s:.\t0x%08x\t%d",regsb[i],cpu.gpr[i]._8[j],cpu.gpr[i]._8[j]);
+		 printf("\n");
+	    }
+	}
+    }
+    else if(strcmp(arg,"w")==0)
+    {
+	list_watchpoint();
+    }
+    return 0;
+}
+
+static int cmd_x(char *args){
+    vaddr_t ad;
+    int num;
+    char *arg_n=strtok(NULL," ");
+    sscanf(arg_n,"%d",&num);
+    char *arg_s=strtok(NULL," ");
+    sscanf(arg_s,"%x",&ad);
+    printf("Address		Dword block		Byte sequence");
+    printf("\n");
+    int i,j;
+    for(i=0;i<num;i++)
+    {    printf("0x%08x\t",ad);
+	 printf("0x%08x\t",vaddr_read(ad,4));
+	 for(j=1;j<=4;j++)
+	 {
+	    printf("%02x ",vaddr_read(ad,j)>>(8*(j-1)));
+	 }
+	 printf("\n");
+	 ad+=4;
+    }
+    return 0;
+}
+
+static int cmd_p(char *args){
+    char *arg=strtok(NULL,"&");
+    //printf("%s\n",arg);
+    bool success=true;
+    int result=expr(arg,&success);
+    printf("Result: %#x\n",result);
+    return 0;
+}
+
+static int cmd_w(char *args){
+    set_watchpoint(args);
+    return 0;
+}
+
+static int cmd_d(char *args){
+    char *arg=strtok(NULL," ");
+    int NO;
+    sscanf(arg,"%d",&NO);
+    delete_watchpoint(NO);
+    return 0;
 }
 
 void ui_mainloop(int is_batch_mode) {
