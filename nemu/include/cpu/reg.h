@@ -30,7 +30,20 @@ typedef union {
   rtlreg_t eax, ecx, edx, ebx, esp, ebp, esi, edi;
 
   vaddr_t eip;};
-  
+  struct {
+    struct {
+      uint32_t CF:1;
+      unsigned : 5;
+      uint32_t ZF:1;
+      uint32_t SF:1;
+      unsigned : 1;
+      uint32_t IF:1;
+      unsigned : 1;
+      uint32_t OF:1;
+      unsigned : 20;
+    };
+    uint32_t value;
+  }eflags;  
 
 } CPU_state;
 
