@@ -31,7 +31,7 @@ typedef union {
 
   vaddr_t eip;};
   struct {
-    struct {
+    union {
       uint32_t CF:1;
       unsigned : 5;
       uint32_t ZF:1;
