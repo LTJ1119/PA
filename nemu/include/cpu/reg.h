@@ -30,8 +30,8 @@ typedef union {
   rtlreg_t eax, ecx, edx, ebx, esp, ebp, esi, edi;
 
   vaddr_t eip;};
-  struct {
-    union {
+  union {
+    struct {
       uint32_t CF:1;
       unsigned : 5;
       uint32_t ZF:1;
