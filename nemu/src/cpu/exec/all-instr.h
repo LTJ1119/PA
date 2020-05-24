@@ -12,3 +12,4 @@ make_EHelper(nemu_trap);
 make_EHelper(nop);
 make_EHelper(jmp);
 make_EHelper(add);
+make_EHelper(lea);
