@@ -7,9 +7,9 @@ make_EHelper(test) {
 }
 
 make_EHelper(and) {
-  rtl_and(&t1,&id_dest->val,&id_src->val);
-  operand_write(id_dest,&t1);
-  rtl_update_ZFSF(&t1,id_dest->width);
+  rtl_and(&t0,&id_dest->val,&id_src->val);
+  operand_write(id_dest,&t0);
+  rtl_update_ZFSF(&t0,id_dest->width);
   t0=0;
   rtl_set_OF(&t0);
   rtl_set_CF(&t0);
