@@ -136,10 +136,15 @@ static inline void rtl_not(rtlreg_t* dest) {
 
 static inline void rtl_sext(rtlreg_t* dest, const rtlreg_t* src1, int width) {
   
-  rtl_shli(dest,src1,(4-width)*8);
-  rtl_shri(dest,dest,(4-width)*8);
+  //rtl_shli(dest,src1,(4-width)*8);
+  //rtl_shri(dest,dest,(4-width)*8);
   // dest <- signext(src1[(width * 8 - 1) .. 0])
   //TODO();
+  int32_t iSrc=(int32_t)(*src1);
+  int iMoveLen=32-width*8;
+  iSrc=iSrc<<iMoveLen;
+  iSrc=iSrc>>iMoveLen;
+  *dest=(unsigned)(iSrc);
 }
 
 static inline void rtl_push(const rtlreg_t* src1) {
