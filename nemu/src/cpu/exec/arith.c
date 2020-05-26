@@ -25,16 +25,17 @@ make_EHelper(sub) {
 
 make_EHelper(cmp) {
   //TODO();
-  rtl_sub(&t2,&id_dest->val,&id_src->val);
-  rtl_sltu(&t3,&id_dest->val,&id_src->val);
-  rtl_set_CF(&t3);
-  rtl_update_ZFSF(&t2,id_dest->width);
-  rtl_msb(&t0,&id_dest->val,id_dest->width);
-  rtl_msb(&t1,&id_src->val,id_src->width);
-  rtl_get_SF(&t1);
-  rtl_xor(&t1,&t0,&t1);
-  rtl_and(&t0,&t1,&t3);
-  rtl_set_OF(&t0);
+  rtl_sub(&t0,&id_dest->val,&id_src->val);
+  rtl_sltu(&t1,&id_dest->val,&t0);
+  rtl_update_ZFSF(&t0,id_dest->width);
+  rtl_sltu(&t3,&id_dest->val,&t0);
+  rtl_or(&t1,&t3,&t1);
+  rtl_set_CF(&t1);
+  rtl_xor(&t1,&id_dest->val,&id_src->val);
+  rtl_xor(&t2,&id_dest->val,&t0);
+  rtl_and(&t1,&t1,&t2);
+  rtl_msb(&t1,&t1,id_dest->width);
+  rtl_set_OF(&t1);
   print_asm_template2(cmp);
 }
 
