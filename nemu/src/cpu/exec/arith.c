@@ -37,38 +37,19 @@ make_EHelper(sub) {
 
 make_EHelper(cmp) {
   //TODO();
-  printf("%d %d\n",id_dest->val,id_src->val);
-  rtl_sub(&t0,&id_dest->val,&id_src->val);
-  //printf("%d %d\n",id_dest->val,id_src->val);
-  rtl_sltu(&t1,&id_dest->val,&t0);
-  rtl_update_ZFSF(&t0,id_dest->width);
-  rtl_sltu(&t3,&id_dest->val,&t0);
-  rtl_or(&t1,&t3,&t1);
-  rtl_set_CF(&t1);
-  rtl_xor(&t1,&id_dest->val,&id_src->val);
-  rtl_xor(&t2,&id_dest->val,&t0);
-  rtl_and(&t1,&t1,&t2);
-  rtl_msb(&t1,&t1,id_dest->width);
-  rtl_set_OF(&t1);
-  rtl_get_ZF(&t0);
-  printf("ZF: %d\n",t0);
-  rtl_get_SF(&t0);
-  printf("SF: %d\n",t0);
-  rtl_get_OF(&t0);
-  printf("OF: %d\n",t0);
-  print_asm_template2(cmp);
- /* rtl_sub(&t2,&id_dest->val,&id_src->val);
-  rtl_sltu(&t3,&id_dest->val,&id_src->val);
-  rtl_set_CF(&t3);
-  rtl_update_ZFSF(&t2,id_dest->width);
-  rtl_msb(&t0,&id_dest->val,id_dest->width);
+  rtl_sext(&t0,&id_src->val,id_src->width);
+  rtl_sub(&t1,&id_dest->val,&t0);
+  rtl_sltu(&t2,&id_dest->val,&id_src->val);
+  rtl_set_CF(&t2);
+  rtl_update_ZFSF(&t1,id_dest->width);
+  rtl_msb(&t2,&id_dest->val,id_dest->width);
+  rtl_msb(&t3,&t1,id_dest->width);
   rtl_msb(&t1,&id_src->val,id_src->width);
-  rtl_xor(&t3,&t0,&t1);
-  rtl_get_SF(&t1);
-  rtl_xor(&t1,&t0,&t1);
-  rtl_and(&t0,&t1,&t3);
+  rtl_xor(&t1,&t1,&t2);
+  rtl_xor(&t0,&t2,&t3);
+  rtl_and(&t0,&t0,&t1);
   rtl_set_OF(&t0);
-  print_asm_template2(cmp);*/
+  print_asm_template2(cmp);
 }
 
 make_EHelper(inc) {
