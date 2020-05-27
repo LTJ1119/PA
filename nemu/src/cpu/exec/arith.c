@@ -48,6 +48,12 @@ make_EHelper(cmp) {
   rtl_and(&t1,&t1,&t2);
   rtl_msb(&t1,&t1,id_dest->width);
   rtl_set_OF(&t1);
+  rtl_get_ZF(&t0);
+  printf("ZF: %d\n",t0);
+  rtl_get_SF(&t0);
+  printf("SF: %d\n",t0);
+  rtl_get_OF(&t0);
+  printf("OF: %d\n",t0);
   print_asm_template2(cmp);
   /*rtl_sub(&t2,&id_dest->val,&id_src->val);
   rtl_sltu(&t3,&id_dest->val,&id_src->val);
