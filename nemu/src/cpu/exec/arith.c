@@ -56,10 +56,14 @@ make_EHelper(cmp) {
   rtl_msb(&t0,&id_dest->val,id_dest->width);
   rtl_msb(&t1,&id_src->val,id_src->width);
   rtl_xor(&t3,&t0,&t1);
+  rtl_get_CF(&t1);
+  printf("CF:%d\n",t1);
   rtl_get_SF(&t1);
+  printf("SF:%d\n",t1);
   rtl_xor(&t1,&t0,&t1);
   rtl_and(&t0,&t1,&t3);
   rtl_set_OF(&t0);
+  printf("OF:%d\n",t0);
   print_asm_template2(cmp);
 }
 
