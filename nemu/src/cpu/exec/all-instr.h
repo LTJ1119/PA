@@ -42,3 +42,5 @@ make_EHelper(cwtl);
 make_EHelper(int);
 make_EHelper(cltd);
 make_EHelper(cwtl);
+make_EHelper(call_rm);
+make_EHelper(jmp_rm);
