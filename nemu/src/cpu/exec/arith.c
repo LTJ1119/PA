@@ -60,6 +60,7 @@ make_EHelper(cmp) {
   rtl_xor(&t1,&t0,&t1);
   rtl_and(&t0,&t1,&t3);
   rtl_set_OF(&t0);
+  print_asm_template2(cmp);
 }
 
 make_EHelper(inc) {
