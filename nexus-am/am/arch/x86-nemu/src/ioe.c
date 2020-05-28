@@ -9,7 +9,7 @@ void _ioe_init() {
 }
 
 unsigned long _uptime() {
-  return 0;
+  return inl(RTC_PORT)-boot_time;
 }
 
 uint32_t* const fb = (uint32_t *)0x40000;
@@ -40,5 +40,9 @@ void _draw_sync() {
 }
 
 int _read_key() {
-  return _KEY_NONE;
+    uint32_t code;
+    code=0;
+    if(inb(0x64))
+        code=inl(0x60);
+    return code;
 }
