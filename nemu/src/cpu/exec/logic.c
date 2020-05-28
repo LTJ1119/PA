@@ -7,6 +7,8 @@ make_EHelper(test) {
   rtl_set_OF(&t1);
   rtl_set_CF(&t1);
   rtl_update_ZFSF(&t0,id_dest->width);
+  rtl_get_ZF(&t0);
+  printf("ZF:%d\n",t0);
   print_asm_template2(test);
 }
 
