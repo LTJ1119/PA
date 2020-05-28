@@ -2,6 +2,7 @@
 
 make_EHelper(test) {
   //TODO();
+  printf("%d\n",id_src->val);
   rtl_and(&t0,&id_dest->val,&id_src->val);
   t1=0;
   rtl_set_OF(&t1);
@@ -9,6 +10,7 @@ make_EHelper(test) {
   rtl_update_ZFSF(&t0,id_dest->width);
   rtl_get_ZF(&t0);
   printf("ZF:%d\n",t0);
+  printf("%d\n",id_src->val);
   print_asm_template2(test);
 }
 
