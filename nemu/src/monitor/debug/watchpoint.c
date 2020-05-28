@@ -66,7 +66,7 @@ int set_watchpoint(char *e){
 bool delete_watchpoint(int NO){
     if(head==NULL)
     {
-	printf("No Watchpoint!\n");
+	//printf("No Watchpoint!\n");
 	return false;
     }
     WP *p=head;
@@ -88,7 +88,7 @@ bool delete_watchpoint(int NO){
     }
     else
     {
-	printf("NO Not Found!\n");
+	//printf("NO Not Found!\n");
 	return false;
     }
     printf("Watchpoint#%d Deleted!\n",NO);
@@ -97,9 +97,9 @@ bool delete_watchpoint(int NO){
 
 void list_watchpoint(){
     WP *p=head;
-    if(head==NULL)
-	printf("No Watchpoint!\n");
-    else
+    //if(head==NULL)
+//	printf("No Watchpoint!\n");
+    if(head!=NULL)
     {
 	printf("NO\tExpr\t	Old Value\n");
 	while(p&&p!=free_)
@@ -114,7 +114,7 @@ WP* scan_watchpoint(){
     WP *p=head;
     if(!p&&p!=free_)
     {
-        printf("No Watchpoint!\n");
+   //     printf("No Watchpoint!\n");
 	return NULL;
     }
     else

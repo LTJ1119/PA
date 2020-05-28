@@ -2,23 +2,23 @@
 
 make_EHelper(add) {
   //TODO();
-  printf("dest:%d src:%d\n",id_dest->val,id_src->val);
+//  printf("dest:%d src:%d\n",id_dest->val,id_src->val);
   rtl_add(&t2,&id_dest->val,&id_src->val);
   rtl_sltu(&t3,&t2,&id_dest->val);
-  printf("t3:%d	t2:%d\n",t3,t2);
+//  printf("t3:%d	t2:%d\n",t3,t2);
   operand_write(id_dest,&t2);
   rtl_update_ZFSF(&t2,id_dest->width);
-  printf("t2:%d\n",t2);
-  printf("dest:%d\n",id_dest->val);
-  rtl_get_ZF(&t0);
-  printf("ZF:%d\n",t0);
-  rtl_get_SF(&t0);
-  printf("SF:%d\n",t0);
+//  printf("t2:%d\n",t2);
+ // printf("dest:%d\n",id_dest->val);
+ // rtl_get_ZF(&t0);
+  //printf("ZF:%d\n",t0);
+ // rtl_get_SF(&t0);
+ // printf("SF:%d\n",t0);
   rtl_sltu(&t0,&t2,&id_dest->val);
-  printf("t0:%d\n",t0);
+//  printf("t0:%d\n",t0);
   rtl_or(&t0,&t3,&t0);
   rtl_set_CF(&t0);
-  printf("CF:%d\n",t0);
+//  printf("CF:%d\n",t0);
   rtl_xor(&t0,&id_dest->val,&id_src->val);
   rtl_not(&t0);
   rtl_xor(&t1,&id_dest->val,&t2);
