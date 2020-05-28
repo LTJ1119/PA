@@ -7,6 +7,10 @@ make_EHelper(add) {
   rtl_sltu(&t3,&t2,&id_dest->val);
   operand_write(id_dest,&t2);
   rtl_update_ZFSF(&t2,id_dest->width);
+  rtl_get_ZF(&t0);
+  printf("ZF:%d\n",t0);
+  rtl_get_SF(&t0);
+  printf("SF:%d\n",t0);
   rtl_sltu(&t0,&t2,&id_dest->val);
   rtl_or(&t0,&t3,&t0);
   rtl_set_CF(&t0);
