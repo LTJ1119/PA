@@ -9,6 +9,7 @@ make_EHelper(add) {
   rtl_sltu(&t0,&t2,&id_dest->val);
   rtl_or(&t0,&t3,&t0);
   rtl_set_CF(&t0);
+  printf("CF:%d\n",t0);
   rtl_xor(&t0,&id_dest->val,&id_src->val);
   rtl_not(&t0);
   rtl_xor(&t1,&id_dest->val,&t2);
