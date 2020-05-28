@@ -151,7 +151,7 @@ void difftest_step(uint32_t eip) {
   // Set `diff` as `true` if they are not the same.
   //TODO();
   if(r.eip!=cpu.eip||r.ebx!=cpu.ebx||r.ecx!=cpu.ecx||r.edx!=cpu.edx|| \
-   r.ebp!=cpu.ebp||r.esp!=cpu.esp||r.edi!=cpu.edi||r.esi!=cpu.esi||r.eax!=cpu.eax)
+   r.ebp!=cpu.ebp||r.esp!=cpu.esp||r.edi!=cpu.edi||r.esi!=cpu.esi||r.eax!=cpu.eax)//|r.eflags.CF!=cpu.eflags.CF||r.eflags.OF!=cpu.eflags.OF||r.eflags.SF!=r.eflags.SF||r.eflags.ZF!=cpu.eflags.ZF)
   { 
     printf("r.eip:%#x,cpu.eip:%#x\n",r.eip,cpu.eip);
     printf("r.ebx:%#x,cpu.ebx:%#x\n",r.ebx,cpu.ebx);
@@ -162,6 +162,10 @@ void difftest_step(uint32_t eip) {
     printf("r.edi:%#x,cpu.edi:%#x\n",r.edi,cpu.edi);
     printf("r.esi:%#x,cpu.esi:%#x\n",r.esi,cpu.esi);
     printf("r.eax:%#x,cpu.eax:%#x\n",r.eax,cpu.eax);
+    /*printf("r.eflags.CF:%#x,cpu.eflags.CF:%#x\n",r.eflags.CF,cpu.eflags.CF);
+    printf("r.eflags.ZF:%#x,cpu.eflags.ZF:%#x\n",r.eflags.ZF,cpu.eflags.ZF);
+    printf("r.eflags.OF:%#x,cpu.eflags.OF:%#x\n",r.eflags.OF,cpu.eflags.OF);
+    printf("r.eflags.SF:%#x,cpu.eflags.SF:%#x\n",r.eflags.SF,cpu.eflags.SF);*/
     diff=true;
   }
   if (diff) {
