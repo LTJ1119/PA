@@ -9,6 +9,7 @@ make_EHelper(add) {
   operand_write(id_dest,&t2);
   rtl_update_ZFSF(&t2,id_dest->width);
   printf("t2:%d\n",t2);
+  printf("dest:%d\n",id_dest->val);
   rtl_get_ZF(&t0);
   printf("ZF:%d\n",t0);
   rtl_get_SF(&t0);
