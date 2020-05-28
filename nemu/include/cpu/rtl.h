@@ -200,14 +200,15 @@ static inline void rtl_update_ZF(const rtlreg_t* result, int width) {
  // eflags.ZF <- is_zero(result[width * 8 - 1 .. 0])
   rtl_set_ZF(&t0);*/
   //TODO();
-  t3=*result;
+  rtlreg_t temp1,temp2;
+  temp1=*result;
   switch(width)
   {
-      case 1: t3=(t3&0x000000ff);break;
-      case 2: t3=(t3&0x0000ffff);break;
+      case 1: temp1=(temp1&0x000000ff);break;
+      case 2: temp1=(temp1&0x0000ffff);break;
   }
-  rtl_eq0(&t2,&t3);
-  rtl_set_ZF(&t2);
+  rtl_eq0(&temp2,&temp1);
+  rtl_set_ZF(&temp2);
 }
 
 static inline void rtl_update_SF(const rtlreg_t* result, int width) {
