@@ -2,6 +2,7 @@
 
 make_EHelper(add) {
   //TODO();
+  printf("dest:%d src:%d\n",id_dest->val,id_src->val);
   rtl_add(&t2,&id_dest->val,&id_src->val);
   rtl_sltu(&t3,&t2,&id_dest->val);
   operand_write(id_dest,&t2);
