@@ -66,10 +66,17 @@ make_EHelper(inc) {
   //TODO();
   rtl_addi(&t0,&id_dest->val,1);
   operand_write(id_dest,&t0);
-  rtl_xor(&t2,&id_dest->val,&t0);
-  rtl_msb(&t2,&t2,id_dest->width);
-  rtl_set_OF(&t2);
+  rtl_sltui(&t2,&t0,1);
+  rtl_set_CF(&t2);
   rtl_update_ZFSF(&t0,id_dest->width);
+  rtl_msb(&t0,&id_src->val,id_dest->width);
+  rtl_msb(&t1,&id_dest->val,id_dest->width);
+  rtl_xor(&t2,&t0,&t1);
+  rtl_eq0(&t2,&t2);
+  rtl_get_SF(&t1);
+  rtl_xor(&t1,&t0,&t1);
+  rtl_and(&t0,&t2,&t1);
+  rtl_set_OF(&t0);
   print_asm_template1(inc);
 }
 
