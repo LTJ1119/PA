@@ -32,12 +32,10 @@ int _write(int fd, void *buf, size_t count){
 }
 
 void *_sbrk(intptr_t increment){
-  extern char end;
+ /* extern char end;
   static intptr_t pEnd=(intptr_t)&end;
   intptr_t PrePEnd=pEnd;
   char buff[128];
-  //sprintf(buff,"\n %d %d 0 0 \n,SYS_brk,pEnd+increment");
-  //_write(0,buff,strlen(buff));
   if(_syscall_(SYS_brk,pEnd+increment,0,0)==0){
     sprintf(buff,"\n成功！ %d %d 0 0 \n",SYS_brk,pEnd+increment);	  
     _write(0,buff,strlen(buff));
@@ -46,9 +44,9 @@ void *_sbrk(intptr_t increment){
   }
   else{
     sprintf(buff,"\n失败！ %d %d 0 0 \n",SYS_brk,pEnd+increment);
-    _write(0,buff,strlen(buff));  
+    _write(0,buff,strlen(buff)); */ 
     return (void *)-1;
-  }
+ // }
 }
 
 int _read(int fd, void *buf, size_t count) {
