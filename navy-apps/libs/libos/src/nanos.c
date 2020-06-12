@@ -35,6 +35,8 @@ void *_sbrk(intptr_t increment){
   static intptr_t pEnd=(intptr_t)&end;
   intptr_t PrePEnd=pEnd;
   char buff[128];
+  sprintf(buff,"\n %d %d 0 0 \n,SYS_brk,pEnd+increment");
+  _write(0,buff,strlen(buff));
   if(_syscall_(SYS_brk,pEnd+increment,0,0)==0){
     sprintf(buff,"\n成功！ %d %d 0 0 \n",SYS_brk,pEnd+increment);	  
     _write(0,buff,strlen(buff));
