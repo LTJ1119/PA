@@ -31,7 +31,19 @@ int _write(int fd, void *buf, size_t count){
 }
 
 void *_sbrk(intptr_t increment){
-  return (void *)-1;
+  extern char end;
+  static intptr_t pEnd=(intptr_t)&end;
+  intptr_t PrePEnd=pEnd;
+  char buff[128];
+  if(_syscall_(SYS_brk,pEnd+increment,0,0)==0){
+    _write(0,buff,strlen(buff));
+    pEnd=PrePEnd+increment;
+    return (void*)PrePEnd;
+  }
+  else{
+    _write(0,buff,strlen(buff));  
+    return (void *)-1;
+  }
 }
 
 int _read(int fd, void *buf, size_t count) {

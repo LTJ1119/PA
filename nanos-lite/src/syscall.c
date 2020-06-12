@@ -29,8 +29,9 @@ static inline uintptr_t sys_close(uintptr_t fd) {
   return 1;
 }
 
-static inline uintptr_t sys_brk(uintptr_t new_brk) {
-  TODO();
+static inline uintptr_t sys_brk(_RegSet *r) {
+  //TODO();
+  SYSCALL_ARG1(r)=0;
   return 1;
 }
 
@@ -56,6 +57,7 @@ _RegSet* do_syscall(_RegSet *r) {
     case SYS_none:sys_none(r);break;
     case SYS_exit:sys_exit(r);break;
     case SYS_write:sys_write(r,a[1],a[2],a[3]);break;
+    case SYS_brk:sys_brk(r);break;
     default: panic("Unhandled syscall ID = %d", a[0]);
   }
 
