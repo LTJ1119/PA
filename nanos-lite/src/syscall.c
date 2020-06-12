@@ -27,7 +27,7 @@ static inline uintptr_t sys_read(_RegSet *r,uintptr_t fd, uintptr_t buf, uintptr
   return 1;
 }
 
-static inline uintptr_t sys_lseek(uintptr_t fd, uintptr_t offset, uintptr_t whence) {
+static inline uintptr_t sys_lseek(_RegSet *r,uintptr_t fd, uintptr_t offset, uintptr_t whence) {
   return fs_lseek(fd, offset, whence);
 }
 
@@ -69,7 +69,7 @@ _RegSet* do_syscall(_RegSet *r) {
     case SYS_open:sys_open(r,a[1],a[2],a[3]);break;
     case SYS_read:sys_read(r,a[1],a[2],a[3]);break;
     case SYS_close:sys_close(r,a[1]);break;
-    case SYS_lseek:sys_lseek(a[1],a[2],a[3]);break;
+    case SYS_lseek:sys_lseek(r,a[1],a[2],a[3]);break;
     default: panic("Unhandled syscall ID = %d", a[0]);
   }
 
