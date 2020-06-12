@@ -12,12 +12,12 @@ static inline uintptr_t sys_open(_RegSet *r,uintptr_t pathname, uintptr_t flags,
 
 static inline uintptr_t sys_write(_RegSet *r, uintptr_t fd, uintptr_t buf, uintptr_t len) {
   //TODO();
-  Log("sys_write()\n");
+  /*Log("sys_write()\n");
   uintptr_t i;
   if(fd==1||fd==2)
     for(i=0;i<len;i++)
-        _putc(((char*)buf)[i]);
-  //SYSCALL_ARG1(r)=fs_write(fd,(void*)buf,len);
+        _putc(((char*)buf)[i]);*/
+  SYSCALL_ARG1(r)=fs_write(fd,(void*)buf,len);
   return 1;
 }
 
